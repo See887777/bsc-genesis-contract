@@ -4,12 +4,10 @@ on:
     branches:
       - master
       - develop
-      - bc-fusion
   pull_request:
     branches:
       - master
       - develop
-      - bc-fusion
 permissions:
   contents: read
   # Optional: allow read access to pull request. Use with `only-new-issues` option.
@@ -37,6 +35,7 @@ jobs:
         run: |
           npm install
           forge install --no-git --no-commit foundry-rs/forge-std@v1.7.3
+          forge --version
 
       - name: Lint Check
         run: |
@@ -49,7 +48,7 @@ jobs:
       - name: Start Local Chain
         run: |
           npm install pm2 -g
-          pm2 start --name local-chain "anvil -f https://bsc-dataseed1.ninicoin.io"
+          pm2 start --name local-chain "anvil -f https://bsc-dataseed.bnbchain.org"
           sleep 5
         env:
           PORT: 8545
